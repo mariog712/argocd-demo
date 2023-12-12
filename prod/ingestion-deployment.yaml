@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ingestion-deployment
+spec:
+  selector:
+    matchLabels:
+      app: ingestion
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: ingestion
+    spec:
+      containers:
+      - name: ingestion
+        image: nicholasjackson/fake-service:v0.24.2
+        ports:
+        - containerPort: 9090
+        env:
+        - name: MESSAGE
+          value: Hello from Ingestion V1
+        - name: NAME
+          value: Ingestion
